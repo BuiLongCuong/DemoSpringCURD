@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.jws.WebParam;
 import java.util.List;
 
 @Controller
@@ -29,7 +31,7 @@ public class StudentController {
         ModelAndView modelAndView = new ModelAndView("create");
         return modelAndView;
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ModelAndView showForm(@PathVariable int id){
         Student student = (Student) studentService.findStudentById(id);
         ModelAndView modelAndView = new ModelAndView("update");
@@ -51,6 +53,19 @@ public class StudentController {
         studentService.delete(id);
         return "redirect:/students/home";
     }
+
+    @GetMapping("/search")
+    public ModelAndView showSearch(@RequestParam String searchName){
+        if (searchName == null){
+            searchName = "";
+        }
+        List<Student> students = studentService.findStudentByName(searchName);
+        ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("list",students);
+        return modelAndView;
+    }
+
+
 //    @GetMapping("/search")
 //    public ModelAndView showSearch(@RequestParam String q){
 //        if (q == null){

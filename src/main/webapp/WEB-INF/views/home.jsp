@@ -38,15 +38,14 @@
     <h2> List Student</h2>
     <div class="d-flex">
         <a  class="float-left" href="http://localhost:8080/students/create"><button class="btn btn-info">Add</button></a></th>
-        <form class="form-inline float-right" action="http://localhost:8080/students?action=search" method="post">
-            <input hidden="hidden" name="action" value="search">
+        <form class="form-inline float-right" action="http://localhost:8080/students/search" method="get">
             <div class="form-group mb-2">
                 <label for="staticEmail2" class="sr-only">Search</label>
-                <input type="text" class="form-control-plaintext" id="staticEmail2" name="search" placeholder="Search">
+                <input type="text" class="form-control-plaintext" id="staticEmail2" name="searchName" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-primary mb-2">Search</button>
         </form>
-        <a  style="margin-left: 10px" class="float-left" href="http://localhost:8080/students?action=home"><button class="btn btn-info">Show All Students</button></a></th>
+        <a  style="margin-left: 10px" class="float-left" href="http://localhost:8080/students/home"><button class="btn btn-info">Show All Students</button></a></th>
     </div>
     <table border>
         <thead>
@@ -62,8 +61,8 @@
                 <td>${item.id}</td>
                 <td>${item.name}</td>
                 <td>
-                    <button><a href="http://localhost:8080/students/update">Edit</a></button>
-                    <button><a href="http://localhost:8080/students/delete">Delete</a></button>
+                    <button><a href="http://localhost:8080/students/${item.id}">Edit</a></button>
+                    <button><a href="http://localhost:8080/students/delete/${item.id}">Delete</a></button>
                 </td>
             </tr>
         </c:forEach>

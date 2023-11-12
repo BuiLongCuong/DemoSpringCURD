@@ -11,4 +11,5 @@ public interface IService<E> {
     void delete(int id);
     void update(int id,E e);
     List<E> findAll();
+    List<E> findStudentByName(String name);
 }

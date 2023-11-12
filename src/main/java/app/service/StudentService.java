@@ -30,9 +30,9 @@ public class StudentService implements IService<Student>{
 
     @Override
     public int findById(int id) {
-        for (Student student : studentList) {
-            if (student.getId() == id) {
-                return student.getId();
+        for (int i = 0; i < studentList.size(); i++) {
+            if(studentList.get(i).getId() == id ){
+                return i;
             }
         }
         return -1;
@@ -42,7 +42,7 @@ public class StudentService implements IService<Student>{
     public void delete(int id) {
         int index = findById(id);
         if(index != -1 ){
-            studentList.remove(id);
+            studentList.remove(index);
         } else {
             System.out.println("Không có học sinh đó!");
         }
@@ -61,6 +61,16 @@ public class StudentService implements IService<Student>{
     @Override
     public List findAll() {
        return this.studentList;
+    }
+    @Override
+    public List<Student> findStudentByName(String name) {
+        List<Student> list = new ArrayList<>();
+        for (Student student : this.studentList) {
+            if (student.getName().toLowerCase().contains(name.toLowerCase())) {
+                list.add(student);
+            }
+        }
+        return list;
     }
 
 //    @Override
@@ -93,4 +103,5 @@ public class StudentService implements IService<Student>{
 //
 //        return list;
 //    }
+
 }
